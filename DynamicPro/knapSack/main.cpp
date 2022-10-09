@@ -14,7 +14,7 @@ void inputData(){
     cout << "Line i: w[i] v[i]" << endl;
     cin >> Wmax;
     cin >> n;
-    for (int i = 1; i < n+1; i++){
+    for (int i = 1; i <= n; i++){
         cin >> w[i];
         cin >> v[i];
     }
@@ -24,15 +24,14 @@ void printRes()
     int i=n;
     int j=Wmax;
     cout << "Max value: " << F[n][Wmax] << endl;
-    cout << "w, v: {";
+    cout << "w v" <<endl;
     while (i >0){
         if (F[i][j] != F[i-1][j]){
-            cout << w[i] <<"," << v[i] <<",";
+            cout << w[i] <<" " << v[i] <<endl;
             j = j- w[i];
         }
         --i;
     }
-    cout << "}";
 
 }
 void resolve(){
