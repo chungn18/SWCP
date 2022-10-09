@@ -1,7 +1,7 @@
 #include <iostream>
 
 using namespace std;
-const int MAX = 5;
+const int MAX = 1000;
 int Wmax;
 int n = 0;
 int w[MAX];
@@ -37,10 +37,10 @@ void printRes()
 void resolve(){
     memset(F,0,MAX*MAX);
     for (int i =1; i <= n; i++){
-        for (int j=0; j<= Wmax; j++ )
+        for (int j=1; j<= Wmax; j++ )
         {
-            F[i][j] = F[i-1][j];
-            if((F[i][j] < F[i-1][j-w[i]] + v[i]) && j>=w[i]){
+            F[i][j] = F[i-1][j]; // gan cho F[i][j] gia tri truoc do de kiem tra truoc khi cap nhap
+            if((F[i][j] < F[i-1][j-w[i]] + v[i]) && j>=w[i]){ //neu gia tri truoc nho hon gia tri dc chon va j >=w[i] thi cap nhat nhat gia tri moi
                 F[i][j] = F[i-1][j-w[i]] + v[i];
             }
         }
