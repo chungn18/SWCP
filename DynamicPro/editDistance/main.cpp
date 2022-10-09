@@ -20,26 +20,29 @@ void inputData(){
         Y[i].insert(0," "); //make string begin from at 1
     }
 }
-void Trace(int lenX,int lenY)
+void Trace(string x, string y)
 {
-    int i = lenX;
-    int j = lenY;
-    for (int i=lenX; i>=0; i--){
-        for (int j=lenY; j>=0; j--){
-            if (F[i][j]==F[i-1][j-1]){
-                i--;j--;
-            }
-            else if (F[i][j]==(F[i][j-1]+1))
-            {
-                cout << "Insert at " << i << Y[i] << endl;
-            }
-            else if (F[i][j]==(F[i-1][j]+1)){
-                cout << "Delete at " << i << Y[i] << endl;
-            }
-            else {
-                cout << "Replace at " << i << Y[i] << endl;
-            }
-
+    int i = x.length()-1;
+    int j = y.length()-1;
+    int count =1;
+    while (i>0 || j>0){
+        if (F[i][j]==F[i-1][j-1]){
+            i--;j--;
+        }
+        else if ((j>0)&&F[i][j]==(F[i][j-1]+1))
+        {
+            cout << count << ".Insert at " << i << " char " << y[j] << endl;
+            i--;
+            count++;
+        }
+        else if ((i>0)&&(j>0)&&F[i][j]==(F[i-1][j]+1)){
+            cout << count << ".Replace at " << i << " char " << x[i] << endl;
+            i--;j--;
+            count++;
+        }
+        else {
+            cout << count << ".Delete at " << i << " char " << x[i] << endl;
+            count++;
         }
     }
 
@@ -70,7 +73,7 @@ int main(){
     inputData();
     for (int i=0; i<Nteca; i++){
     resolve(X[i],Y[i]);
-    Trace(X[i].length(),Y[i].length());
+    Trace(X[i],Y[i]);
     }
 
 }
