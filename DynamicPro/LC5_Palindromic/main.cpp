@@ -2,37 +2,38 @@
 #include <cstring>
 
 using namespace std;
+string str;
+void Input(){
+    cout << "Input you string: ";
+    cin >> str;
+}
+
+int getLen(string s, int L, int R){
+    while((L>=0) && (R<s.length()) && (s[L]==s[R])){
+        L--;
+        R++;
+    }
+    return R-L-1;
+}
+
 string longestPalindrome(string s) {
-    int size = s.length();
-    int F[size+1][size+1];
-    memset(F,0,size*size);
-    int imax =0, jmax=0, lenmax=1;
-    for (int i=size/2; i>=0; i--){
-        for (int j=i; j<=size;j++){
-            if (i==j){
-                F[i][j]=1;
-            }
-            else if((j==i+1) && (lenmax <2)){
-                F[i][j] = 2;
-                lenmax = 2;
-                imax=i;
-                jmax=j;
-            }
-            else if ((F[i][j] == (F[i+1][j-1]+2))&& ((j-i+1)>lenmax)){
-                F[i][j] = F[i+1][j-1]+2;
-                lenmax = j-i+1;
-                imax =i;
-                jmax =j;
-            }
-            else {
-                F[i][j]=F[i][j-1];
-            }
+    if (s.length()<1) return "";
+    int lenmax =0, len =0, start=0, end=0;
+    for (int i=0; i<s.length(); i++){
+        len = max(getLen(s,i,i),getLen(s,i,i+1));
+        if (len>lenmax){
+            lenmax =len;
+            start = i-(lenmax-1)/2;
         }
     }
-    return s.substr(imax,jmax);
+
+    return s.substr(start,lenmax);
 }
 
 int main(){
-    string c = longestPalindrome("babad");
+    while(1){
+    Input();
+    string c= longestPalindrome(str);
     cout << c <<endl;
+    }
 }
