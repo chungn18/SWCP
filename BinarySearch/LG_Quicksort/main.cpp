@@ -18,6 +18,17 @@ void Input(){
     }
 }
 
+void printArr(vector<int> arr)
+{
+    int len = arr.size();
+    for (int i=0; i< len; i++){
+        if (i == len-1)
+        cout << arr[i] << endl;
+        else
+        cout << arr[i] << ", ";
+    }
+}
+
 int partition(int lo, int hi) {
     int pivot = arr[lo];
     int left = lo +1, right = hi;
@@ -36,21 +47,16 @@ int partition(int lo, int hi) {
 void quicksort(int lo, int hi) {
     if (lo < hi) {
         int p = partition(lo, hi);
+        cout << "\nCase 1: Value of lo and hi: " << lo << ", " << hi << endl;
+        printArr(arr);
         quicksort(lo, p - 1);
+        cout << "\nCase 2: Value of lo and hi: " << lo << ", " << hi << endl;
+        printArr(arr);
         quicksort(p+1, hi);
+        cout << "\nCase 3: Value of lo and hi: " << lo << ", " << hi << endl;
+        printArr(arr);
     }
 } 
-
-void printArr(vector<int> arr)
-{
-    int len = arr.size();
-    for (int i=0; i< len; i++){
-        if (i == len-1)
-        cout << arr[i] << endl;
-        else
-        cout << arr[i] << ", ";
-    }
-}
 
 int main(){
     Input();
