@@ -2,9 +2,10 @@
 #include <cstring>
 #include <vector>
 #include <cmath>
+#include <limits>
+
 using namespace std;
 int n= 0;
-float dx;
 struct cor {
     int x;
     int y;
@@ -35,19 +36,17 @@ float dis (cor i, cor j){
     return sqrt(pow(j.x - i.x,2)+ pow(j.y-i.y,2));
 }
 
-void printArr(vector<int> arr)
+void printArr(vector<cor> arr)
 {
     int len = arr.size();
     for (int i=0; i< len; i++){
-        if (i == len-1)
-        cout << arr[i] << endl;
-        else
-        cout << arr[i] << ", ";
+        cout << "(" << arr[i].x << "," << arr[i].y << ")";
     }
+    cout << endl;
 }
 
 float bruceForce(vector<cor> arr, int n){
-    float minDis = INT_MAX;
+    float minDis = numeric_limits<float>::max();
     for (int i=0; i<=n; i++)
         for (int j=i+1; j<=n; j++){
             if (minDis > dis(arr[i],arr[j]))
@@ -56,47 +55,41 @@ float bruceForce(vector<cor> arr, int n){
     return minDis;
 }
 
-float minDisX(vector<cor> arr, int l, int r)
+float minDisY(const vector<cor> arr, float dx){
+    float dy = numeric_limits<float>::max();
+    int size = arr.size();
+    for (int i=0; i<size; i++){
+        for (int j=i; j<size; j++){
+            if ((dy > dis(arr[i], arr[j])) && (abs(arr[i].y-arr[size].y) <= dx)){
+                dy = dis(arr[i], arr[j]);
+            }
+        }
+    }
+    return dy;
+}
+float minDis(vector<cor> arr, int l, int r)
 {
     int m = (l+r)/2;
     if (r-l <=3){
         return bruceForce(arr,m);
     }
-    return min(minDisX(arr,l,m),minDisX(arr,m+1,r));
-}
-vector<cor> collecXmin(const vector<cor> arr){
-    vector<cor> arrTemp;
-    int size = (arr.size()-1)/2;
-    for (int i=0; i<arr.size(); i++){
-        if (abs(arr[i].x-arr[size].x) <= dx){
-            arrTemp.push_back(arr[i]);
+    
+    float dx = min(minDis(arr,l,m),minDis(arr,m+1,r));
+    int n = r-l;
+    vector<cor> minArrX;
+    for (int i=0; i <= n; i++){
+        if (abs(arr[i].x-arr[m].x) <= dx){
+            minArrX.push_back(arr[i]);
         }
     }
-    return arrTemp;
+    return min(dx,minDisY(arr,dx));
 }
-vector<cor> collecYmin(const vector<cor> arr){
-    vector<cor> arrTemp;
-    int size = (arr.size()-1)/2;
-    for (int i=0; i<arr.size(); i++){
-        if (abs(arr[i].y-arr[size].y) <= dx){
-            arrTemp.push_back(arr[i]);
-        }
-    }
-    return arrTemp;
-}
+
 int main(){
     Input();
-    vector<cor> sortArrX = Array; //initialize an array to save Array of sort by x coordinate
-    vector<cor> minArrX;          //intialize an array to save elements that distance to midle point by x < dx
-    vector<cor> minArrXY;         //intialize an array to save elements that distance to midle point by y < dx          
+    vector<cor> sortArrX = Array; //initialize an array to save Array of sort by x coordinate      
     sort (sortArrX.begin(), sortArrX.end(),compareX);
-    
-    dx = minDisX(sortArrX,0,sortArrX.size()-1);
-    minArrX = collecXmin(sortArrX);
-    sort (minArrX.begin(), minArrX.end(),compareY);
-    minArrXY = collecYmin(minArrX);
-    float dmin = bruceForce(minArrXY, minArrXY.size()-1);
-
+    float dmin = minDis(sortArrX,0,sortArrX.size()-1);
     cout <<"--------------OUTPUT------------" << endl;
     cout <<"Min distance is: " << dmin << endl;
 }
