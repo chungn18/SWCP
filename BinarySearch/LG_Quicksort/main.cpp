@@ -47,13 +47,13 @@ int partition(int lo, int hi) {
 void quicksort(int lo, int hi) {
     if (lo < hi) {
         int p = partition(lo, hi);
-        cout << "\nCase 1: Value of lo and hi: " << lo << ", " << hi << endl;
+        cout << "\nCase 1: Value of lo, hi and p: " << lo << ", " << hi << ", " << p <<endl;
         printArr(arr);
         quicksort(lo, p - 1);
-        cout << "\nCase 2: Value of lo and hi: " << lo << ", " << hi << endl;
+        cout << "\nCase 2: Value of lo, hi and p: " << lo << ", " << hi << ", " << p <<endl;
         printArr(arr);
         quicksort(p+1, hi);
-        cout << "\nCase 3: Value of lo and hi: " << lo << ", " << hi << endl;
+        cout << "\nCase 3: Value of lo, hi and p: " << lo << ", " << hi << ", " << p <<endl;
         printArr(arr);
     }
 } 
