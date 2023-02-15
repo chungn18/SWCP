@@ -11,13 +11,13 @@ bool isValid(string s) {
     for (std::string::iterator it = s.begin(); it != s.end(); ++it){
         if (*it ==  '(' || *it == '[' || *it == '{'){
             st.push(*it);
-            cout << "Push new character: " << st.top() << endl;
+            //cout << "Push new character: " << st.top() << endl;
         }
 
         else if ((*it ==  ')' || *it == ']' || *it == '}') && !st.empty()) {
             c = st.top();
             st.pop();
-            cout << "Close character: " << *it << endl;
+            //cout << "Close character: " << *it << endl;
             if (*it == ')' && c != '(') return false;
             if (*it == ']' && c != '[') return false;
             if (*it == '}' && c != '{') return false;
@@ -33,6 +33,7 @@ bool isValid(string s) {
 int main(){
 
 	string str;
+    cout << "Input your string: " << endl;
 	cin >> str;
 	cout << "Output: " << isValid(str) << endl;
 	return 0;
