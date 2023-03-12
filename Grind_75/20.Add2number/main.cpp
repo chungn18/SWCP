@@ -2,32 +2,27 @@
 #include <vector>
 #include <algorithm>
 #include <cstring>
+#include <climits>
 using namespace std;
 
-string addBinary(string a, string b, int base) {
-
-    int aChar, bChar;
-    string res;
-    int sum = 0, mod = 0;
-    int i = a.length()-1;
-    int j = b.length()-1;
-    while (i >=0 || j >=0 || mod > 0){
-        aChar = (i >= 0 ? a[i]-'0' : 0);
-        bChar = (j >= 0 ? b[j]-'0' : 0);
-        sum = aChar + bChar + mod;
-        res = char(sum%base + '0') + res;
-        if (sum > base) mod = sum/base;
-        else mod = 0;
-        i--; j--; 
+int maxSubArray(vector<int>& nums) {
+    int sum = INT_MIN, summax = INT_MIN;
+    int begin = 0;
+    if (nums.size() == 1) return nums[0];
+    for (int i = 0; i <nums.size(); i++){
+        if (sum < 0) {
+            begin = i;
+            sum = nums[i];
+        }
+        else sum += nums[i];
+        if (sum > summax) summax=sum;
     }
-    cout << res << endl;
-    return res;
-}
+    return summax;
+    }
 
 int main(int arg, char* argv[]){
 
-    string a,b;
-    cin >> a >> b;
-    cout << "Output: " << addBinary(a,b,10) << endl;
+    vector<int> nums = {-4,-3,-2,-5,-10};
+    cout << "Output: " << maxSubArray(nums) << endl;
     return 1;
 }

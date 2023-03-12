@@ -7,6 +7,12 @@
         "algorithm": "cpp",
         "iosfwd": "cpp",
         "vector": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "*.tcc": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "unordered_map": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp"
     }
 }
