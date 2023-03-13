@@ -42,11 +42,11 @@ void DFS(vector<vector<int> > &graph, int s){
     sta.push(s);
     while(!sta.empty()){
         n = sta.top();
+        sta.pop();
         visited[n]++;
         if(visited[n]==1){
             cout << n << " ";
         }
-        sta.pop();
         for (int i=0; i< graph[0].size(); i++)
             if(visited[i] ==0 && graph[n][i] == 1 && n !=i){
                 sta.push(i);
