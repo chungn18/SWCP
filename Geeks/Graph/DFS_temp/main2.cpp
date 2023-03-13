@@ -36,14 +36,16 @@ void printGraph(vector<vector<int> > &graph)
 
 void DFS(vector<vector<int> > &graph, int s){
     
-    vector<bool> visited(graph[0].size(),0);
+    vector<int> visited(graph[0].size(),0);
     stack<int> sta;
     int n;
     sta.push(s);
     while(!sta.empty()){
         n = sta.top();
-        visited[n]=1;
-        cout << n;
+        visited[n]++;
+        if(visited[n]==1){
+            cout << n << " ";
+        }
         sta.pop();
         for (int i=0; i< graph[0].size(); i++)
             if(visited[i] ==0 && graph[n][i] == 1 && n !=i){
