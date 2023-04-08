@@ -1,0 +1,1 @@
+maxLen = max (maxLen,i -  start);
