@@ -16,6 +16,12 @@
         "initializer_list": "cpp",
         "new": "cpp",
         "typeindex": "cpp",
-        "typeinfo": "cpp"
-    }
+        "typeinfo": "cpp",
+        "forward_list": "cpp",
+        "unordered_set": "cpp",
+        "ranges": "cpp",
+        "span": "cpp",
+        "valarray": "cpp"
+    },
+    "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools"
 }
