@@ -1,0 +1,26 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int jump(vector<int>& nums) {
+    
+    for (int i = 1; i < nums.size(); i++){
+        nums[i] = max(nums[i] + i, nums[i-1]);
+    }
+    int ind = 0;
+    int ans =0;
+    while (ind < nums.size()-1){
+        ans++;
+        ind = nums[ind];
+    }
+    return ans;
+}
+
+int main(int arg, char* argv[]){
+
+    vector<int> nums = {2,3,1,1,4};
+    int res = jump(nums);
+    cout << "Result: \n";
+    cout << res << endl;
+    return 1;
+}

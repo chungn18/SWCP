@@ -23,6 +23,7 @@ bool checkCycle(int v, list<int> *adj, vector<bool>& visited, vector<bool>& recS
         }
     }
     recSta[v] = false;
+    cout << "recSta: " << v << endl;
     return false;
 }
 
@@ -38,6 +39,9 @@ bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
         for (int i= 0; i < numCourses; i++){
             if (!visited[i] && checkCycle(i,edg,visited,recSta)) {
                 delete[] edg;
+                for (auto i:recSta){
+                    cout << i << endl;
+                }
                 return true;
             }
         }
@@ -45,11 +49,11 @@ bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
         return false;
     }
 int main(int arg, char* argv[]){
-    int numCourses = 2;
-    vector<vector<int> > prerequisites = {{1,0}};
-    cout << "Result: " << endl;
-    cout << canFinish(numCourses,prerequisites);
-    cout << endl;
+    int numCourses = 5;
+    bool res;
+vector<vector<int> > prerequisites = {{0,1},{1,2},{1,3},{1,4},{3,4}};
+    res = canFinish(numCourses,prerequisites);
+    cout << "Result: " << res << endl;
     return 1;
 }
 

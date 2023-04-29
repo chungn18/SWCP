@@ -27,11 +27,13 @@ bool isAnagram(string s, string t) {
         
 }
 void inStr(){
+    cout << "a-A: " << 'a' - 'A';
     cout << "Type your input is 2 strings\n";
     cin >> s >> t;
     cout << "Your input...\n";
     cout << "String s: " << s << endl;
     cout << "String t: " << t << endl;
+    cout << "a-A: " << 'a' - 'A';
 }
 int main(){
 
